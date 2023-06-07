@@ -1,0 +1,1 @@
+This step computes CO-V and CO-B scores for sequence aligned DHS elements based on output from step 1-3.
