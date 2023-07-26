@@ -10,9 +10,9 @@ To reproduce the FUNCODE scores, use the following steps:
 
 3. Integrate data between human and mouse
 
-4. Compute FUNCODE scores for sequence alignable DHS elements
+4. Compute FUNCODE CO-V and CO-B scores for sequence alignable DHS pairs
 
-5. Compute FUNCODE scores for sequence non-alignable DHS elements
+5. Compute FUNCODE CO-V scores for sequence DHS pairs with nearby gene homology, and calls significantly conserved pairs
 
 For details on each step, see README in the corresponding sub-directories.
 
