@@ -19,4 +19,5 @@ For details on each step, see README in the corresponding sub-directories.
 Report bugs and provide suggestions by sending email to:
 
 Author and maintainer: Weixiang Fang (wfang9@jh.edu)
+
 Contributers: Chaoran Chen, Boyang Zhang
