@@ -14,8 +14,6 @@ To reproduce the FUNCODE scores, use the following steps:
 
 5. Compute FUNCODE scores for sequence non-alignable DHS elements
 
-6. Downstream analysis of FUNCODE scores
-
 For details on each step, see README in the corresponding sub-directories.
 
 Report bugs and provide suggestions by sending email to:
