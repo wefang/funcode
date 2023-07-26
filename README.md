@@ -6,6 +6,7 @@ Scripts for computing FUNCODE scores from ENCODE DNase-seq, ATAC-seq and Histoen
 These scripts produce data corresponding to two output types on the ENCODE data portal:
 
 (1) "functional conservation quantification"
+
 (2) "functional conservation mapping".
 
 - "functional conservation mapping" is relevant if the user would like to map regulatory elements across species.
