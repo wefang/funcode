@@ -1,0 +1,5 @@
+hub hg38 FUNCODE scores
+shortLabel hg38 FUNCODE scores
+longLabel hg38 FUNCODE scores
+genomesFile genomes.txt
+email wfang9@jh.edu

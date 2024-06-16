@@ -1,62 +1,23 @@
-devtools::load_all()
 library(tidyverse)
 library(Seurat)
-
-file_meta = readr::read_tsv("C:\\Projects/scdl_v0/metadata/11Aug_hg38_mm10_DNase_ATAC_Histone_file_metadata.tsv")
-exp_meta = readr::read_tsv("C:\\Projects/scdl_v0/metadata/11Aug_hg38_mm10_DNase_ATAC_Histone_exp_metadata.tsv", skip = 1)
+source("./helper/helper.R")
+file_meta = readr::read_tsv("./metadata/11Aug_hg38_mm10_DNase_ATAC_Histone_file_metadata.tsv")
+exp_meta = readr::read_tsv("./metadata/11Aug_hg38_mm10_DNase_ATAC_Histone_exp_metadata.tsv", skip = 1)
 exp_meta = exp_meta[exp_meta$`Target of assay` %in% c("H3K4me1", "H3K4me3", "H3K27ac") &
                             exp_meta$`Assay name` != "Mint-ChIP-seq", ]
-# all(exp_meta$Accession %in% exp_meta_wc$Accession)
-
 mouse_correct = readRDS("./intermediate_data/encodev4_mouse_chromatin_correct.rds")
-# mouse_correct = readRDS("./intermediate_data/mouse_chromatin_correct.rds")
 mouse_dnase_var_std = calc_var_std_ver1(mouse_correct)
-
-# exp_meta_wc = readr::read_tsv("C:\\Projects/scdl_v0/metadata/26March22_hg38_mm10_DNase_ATAC_Histone_exp_metadata_wcontrol.tsv", skip = 1)
-# exp_meta = left_join(exp_meta, select(exp_meta_wc, Accession, Controls))
-# exp_meta$control_acc = map(strsplit(exp_meta$Controls, ","), function(x) {
-#         map_chr(strsplit(x, "/"), function(y) {
-#                 if (length(y) > 1) {
-#                         return(y[3])
-#                 } else {
-#                         return(NA)
-#                 }
-#         })
-# })
-
-# set assay #
+# set assay
 assay = "H3K4me1"
 # assay = "H3K27ac"
 # assay = "H3K4me3"
-# set assay #
 histone_mat = readRDS(paste0("E:\\GlobusDownload/histone_norm_correct/Mus_musculus_", assay, "_norm_correct.rds"))
 mouse_var_std = calc_var_std_ver1(histone_mat)
-# control_mat_all = readRDS("E:\\GlobusDownload/histone_norm_correct/Mus_musculus_Control_norm_correct.rds")
-
 exp_meta_raw = readr::read_tsv("C:\\Projects/scdl_v0/metadata/11Aug_hg38_mm10_DNase_ATAC_Histone_exp_metadata.tsv", skip = 1)
 exp_meta_raw$`Tissue/cell types` = NA
 histone_mat = histone_mat[, exp_meta_raw$`Assay title`[match(colnames(histone_mat), exp_meta_raw$Accession)] == "Histone ChIP-seq"]
 all(colnames(histone_mat) %in% exp_meta$Accession)
 exp_meta_sel = exp_meta[match(colnames(histone_mat), exp_meta$Accession), ]
-
-# excluding sample with no control
-# exp_acc_sel = map_lgl(exp_meta_sel$control_acc, function(x) {
-#         !all(is.na(x))
-# })
-# histone_mat = histone_mat[, exp_acc_sel]
-# exp_meta_sel = exp_meta_sel[exp_acc_sel, ]
-
-# compile control matrix
-# control_histone_matched = do.call(cbind, map(exp_meta_sel$control_acc, function(x) {
-#         x = x[!is.na(x)]
-#         rowMeans(control_mat_all[, x, drop = F])
-# }))
-# 
-# dim(control_histone_matched) == dim(histone_mat)
-# histone_mat_fc = (histone_mat + 1) / (control_histone_matched + 1)
-# saveRDS(histone_mat_fc, file = paste0("./intermediate_data/histone_fc/mouse_", assay, ".rds"))
-
-# Heatmap(t(scale(t(log2(1 + histone_mat_fc[sample(1.8e6, 1000), ])))), show_column_names = F)
 
 region_filter = matrixStats::rowMaxs(histone_mat) > 5 &
         matrixStats::rowMaxs(mouse_correct) > 10

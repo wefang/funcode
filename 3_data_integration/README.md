@@ -7,7 +7,7 @@ For chromatin accessibility:
 
 For Histone ChIP-seq:
 
-1. 'human/mouse_reverse_transfer_v1.R' transfers histone ChIP-seq data to the CA data space
+1. 'human/mouse_reverse_transfer.R' transfers histone ChIP-seq data to the CA data space
 
-2. 'integrate_human_mouse_histone_v1.R' integrates all CA and transferred histone ChIP-seq data between human and mouse
+2. 'integrate_human_mouse_histone.R' integrates all CA and transferred histone ChIP-seq data between human and mouse
 

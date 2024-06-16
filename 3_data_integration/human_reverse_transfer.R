@@ -1,79 +1,32 @@
 library(Seurat)
-devtools::load_all()
 library(tidyverse)
-
-file_meta = readr::read_tsv("C:\\Projects/scdl_v0/metadata/11Aug_hg38_mm10_DNase_ATAC_Histone_file_metadata.tsv")
-exp_meta = readr::read_tsv("C:\\Projects/scdl_v0/metadata/11Aug_hg38_mm10_DNase_ATAC_Histone_exp_metadata.tsv", skip = 1)
+source("./helper/helper.R")
+file_meta = readr::read_tsv("./metadata/11Aug_hg38_mm10_DNase_ATAC_Histone_file_metadata.tsv")
+exp_meta = readr::read_tsv("./metadata/11Aug_hg38_mm10_DNase_ATAC_Histone_exp_metadata.tsv", skip = 1)
 exp_meta = exp_meta[exp_meta$`Target of assay` %in% c("H3K4me1", "H3K4me3", "H3K27ac") &
                             exp_meta$`Assay name` != "Mint-ChIP-seq", ]
 exp_meta$`Tissue/cell types` = NA
-
-# not to be repeated
 human_correct = readRDS("./intermediate_data/encodev4_human_chromatin_correct.rds")
 human_dnase_var_std = calc_var_std_ver1(human_correct)
-
-# all(exp_meta$Accession %in% exp_meta_wc$Accession)
-
-# here loading control data for histone. final version does not adjust for controls
-# exp_meta_wc = readr::read_tsv("C:\\Projects/scdl_v0/metadata/26March22_hg38_mm10_DNase_ATAC_Histone_exp_metadata_wcontrol.tsv", skip = 1)
-# exp_meta = left_join(exp_meta, select(exp_meta_wc, Accession, Controls))
-# exp_meta$control_acc = map(strsplit(exp_meta$Controls, ","), function(x) {
-#         map_chr(strsplit(x, "/"), function(y) {
-#                 if (length(y) > 1) {
-#                         return(y[3])
-#                 } else {
-#                         return(NA)
-#                 }
-#         })
-# })
-
-# set assay #
-# assay = "H3K4me1"
-assay = "H3K4me3"
+all(exp_meta$Accession %in% exp_meta_wc$Accession)
+# set assay name
+# assay = "H3K4me3"
 # assay = "H3K27ac"
-# set assay
+# assay = "H3K4me1"
+# Data processed from '2_process_fragments'
 histone_mat = readRDS(paste0("E:\\GlobusDownload/histone_norm_correct/Homo_sapiens_", assay, "_norm_correct.rds"))
 human_var_std = calc_var_std_ver1(histone_mat)
 # control_mat_all = readRDS("E:\\GlobusDownload/histone_norm_correct/Homo_sapiens_Control_norm_correct.rds")
-
-exp_meta_raw = readr::read_tsv("C:\\Projects/scdl_v0/metadata/11Aug_hg38_mm10_DNase_ATAC_Histone_exp_metadata.tsv", skip = 1)
+exp_meta_raw = readr::read_tsv("./metadata/11Aug_hg38_mm10_DNase_ATAC_Histone_exp_metadata.tsv", skip = 1)
 exp_meta_raw$`Tissue/cell types` = NA
 
 histone_mat = histone_mat[, exp_meta_raw$`Assay title`[match(colnames(histone_mat), exp_meta_raw$Accession)] == "Histone ChIP-seq"]
 all(colnames(histone_mat) %in% exp_meta$Accession)
 exp_meta_sel = exp_meta[match(colnames(histone_mat), exp_meta$Accession), ]
-
-# this version is processed with control, seems to be worse, not using for now
-# excluding sample with no control
-# exp_acc_sel = map_lgl(exp_meta_sel$control_acc, function(x) {
-#  !all(is.na(x))
-# })
-# histone_mat = histone_mat[, exp_acc_sel]
-# exp_meta_sel = exp_meta_sel[exp_acc_sel, ]
-
-# compile control matrix
-# control_histone_matched = do.call(cbind, map(exp_meta_sel$control_acc, function(x) {
-#          x = x[!is.na(x)]
-#          rowMeans(control_mat_all[, x, drop = F])
-# }))
-# 
-# dim(control_histone_matched) == dim(histone_mat)
-# histone_mat_fc = (histone_mat + 1) / (control_histone_matched + 1)
-# saveRDS(histone_mat_fc, file = paste0("./intermediate_data/histone_fc/human_", assay, "_v1.rds"))
-# 
-# histone_mat_fc = readRDS(paste0("./intermediate_data/histone_fc/human_", assay, ".rds"))
-# exp_meta_sel = exp_meta[match(colnames(histone_mat_fc), exp_meta$Accession), ]
-# end control
-
-# Heatmap(t(scale(t(log2(1 + histone_mat_fc[sample(1.8e6, 1000), ])))), show_column_names = F)
-
 all(colnames(human_correct) %in% exp_meta_raw$Accession)
-
 region_filter = matrixStats::rowMaxs(histone_mat) > 5 &
         matrixStats::rowMaxs(human_correct) > 10
 human_mod_var_feature = rownames(human_correct)[which(rank(human_var_std) > 1.6e6 & rank(human_dnase_var_std) > 1.6e6 & region_filter)]
-length(human_mod_var_feature)
-
 rownames(histone_mat) = rownames(human_correct)
 
 human_correct_obj = CreateSeuratObject(counts = histone_mat[human_mod_var_feature, ],
@@ -81,7 +34,6 @@ human_correct_obj = CreateSeuratObject(counts = histone_mat[human_mod_var_featur
 human_correct_obj$organism = "human"
 human_correct_obj$modality = assay
 human_correct_obj = add_metadata(human_correct_obj, exp_meta_sel)
-
 human_dnase_correct_obj = CreateSeuratObject(counts = human_correct[human_mod_var_feature, ],
                                              assay = "OpenChromatin")
 human_dnase_correct_obj = add_metadata(human_dnase_correct_obj, exp_meta_raw)

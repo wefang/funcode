@@ -1,70 +1,34 @@
-# this version computes histone scores based on element specific NULL distributions
-# and uses h-value definition for baseline/housekeeping elements
-devtools::load_all()
 library(tidyverse)
 library(Seurat)
 library(ggpubr)
 library(ComplexHeatmap)
-source("R_production/load_dnase_atac_exp_metadata.R")
-source("R_production/config.R")
-source("R_production/def_color.R")
-
-script_output_dir = "./output/histone_conservation_v2/"
+region_file = "./output/indexed_dhs_mapped_regions.rds"
+source("./helper/helper.R")
+source("./helper/def_color.R")
+script_output_dir = "./output/histone_conservation/"
 if (!dir.exists(script_output_dir)) {
         dir.create(script_output_dir)
 }
-script_plot_dir = "./plots/histone_chromatin_v1/"
+script_plot_dir = "./plots/histone_chromatin/"
 if (!dir.exists(script_plot_dir)) {
         dir.create(script_plot_dir)
 }
-
-compute_hval <- function(human_mat, mouse_mat, human_quantile_vec, mouse_quantile_vec, prob_vec) {
-        human_hval_ind = do.call(cbind, map(1:length(prob_vec), function(i) {
-                rowMeans(human_mat > human_quantile_vec[i]) > prob_vec[i]
-        }))
-        human_hval = apply(human_hval_ind, 1, function(x) {
-                if (!any(x)) {
-                        return(0)
-                }
-                prob_vec[tail(which(x), 1)]
-        })
-        mouse_hval_ind = do.call(cbind, map(1:length(prob_vec), function(i) {
-                rowMeans(mouse_mat > mouse_quantile_vec[i]) > prob_vec[i]
-        }))
-        mouse_hval = apply(mouse_hval_ind, 1, function(x) {
-                if (!any(x)) {
-                        return(0)
-                }
-                prob_vec[tail(which(x), 1)]
-        })
-        hval = pmin(human_hval, mouse_hval)
-        hval
-}
-
 regions = readRDS(region_file)
 regions$human_dist_cat = factor(cut(regions$dist_tss_hg38, c(-Inf, 200, 2000, Inf)), labels = c("promoter", "proximal", "distal"))
 regions$mouse_dist_cat = cut(regions$dist_tss_mm10, c(-Inf, 200, 2000, Inf), labels = c("promoter", "proximal", "distal"))
 regions$dist_pair_cat = paste0(regions$human_dist_cat, "_", regions$mouse_dist_cat)
-
-# assign category of DHS based on distance
 null_tb = as_tibble(expand.grid(human_dist_cat = c("promoter", "proximal", "distal"),
                                 mouse_dist_cat = c("promoter", "proximal", "distal")))
 null_tb$dist_pair_cat = paste0(null_tb$human_dist_cat, "_", null_tb$mouse_dist_cat)
-
 set.seed(37)
 null_size = 5e5
 for (assay in c("H3K4me1", "H3K4me3", "H3K27ac")) {
-        # assay = "H3K4me1"
-        # assay = "H3K27ac"
-        # assay = "H3K4me3"
         message(assay)
         human_histone = readRDS(paste0("E:\\GlobusDownload/histone_norm_correct/Homo_sapiens_", assay, "_norm_correct.rds"))
         mouse_histone = readRDS(paste0("E:\\GlobusDownload/histone_norm_correct/Mus_musculus_", assay, "_norm_correct.rds"))
-        
         anchors = readRDS(paste0("./output/histone_conservation_v1/", "anchors_", assay, "_v1.rds"))
         all(anchors$accession1 %in% colnames(human_histone))
         all(anchors$accession2 %in% colnames(mouse_histone))
-        
         # anchors = anchors[anchors$score > 0.5, ]
         # calling conserved elements
         loci_cor = map_dbl(1:nrow(human_histone), function(j) {
@@ -117,8 +81,7 @@ for (assay in c("H3K4me1", "H3K4me3", "H3K27ac")) {
         null_tb$spearman_pval_adj = map(null_tb$spearman_pval, function(x) {
                 p.adjust(x, method = "fdr")
         })
-
-        prob_vec = seq(0.1, 1.0, by = 0.01)
+        prob_vec = seq(0.01, 1.0, by = 0.01)
         human_quantile_vec = quantile(human_histone[sample(nrow(human_histone), 1e5), anchors$accession1], prob_vec)
         mouse_quantile_vec = quantile(mouse_histone[sample(nrow(mouse_histone), 1e5), anchors$accession2], prob_vec)
         loci_hval = compute_hval(human_histone[, anchors$accession1],
@@ -157,9 +120,7 @@ for (assay in c("H3K4me1", "H3K4me3", "H3K27ac")) {
         sum(map_dbl(null_tb$hval_pval_adj, function(x) sum(x < 0.1)))
         save(loci_cor, loci_hval, null_tb, file = paste0(script_output_dir, assay, "_scores.rda"))
 }
-
-
-print(load(paste0("./output/chromatin_conservation_v1/scores.rda")))
+print(load(paste0("./output/chromatin_conservation/scores.rda")))
 cor_null_all_cat = bind_rows(map(1:nrow(null_tb), function(i) {
         cat_indices = which(regions_all$dist_pair_cat == null_tb$dist_pair_cat[i])
         cat_indices = cat_indices[cat_indices <= length(loci_cor)]
