@@ -2,6 +2,10 @@
 
 Scripts for computing FUNCODE scores from ENCODE DNase-seq, ATAC-seq and Histoen ChIP-seq data.
 
+### UCSC Browser track hubs:
+[hg38](https://raw.githubusercontent.com/wefang/funcode/main/track_hubs/hg38_hub/hub.txt)
+[mm10](https://raw.githubusercontent.com/wefang/funcode/main/track_hubs/mm10_hub/hub.txt)
+
 ### Output types on ENCODE data portal
 These scripts produce data corresponding to two output types on the ENCODE data portal:
 
