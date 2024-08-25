@@ -69,6 +69,10 @@ To reproduce the FUNCODE scores, use the following steps:
 
 5. Compute FUNCODE CO-V scores for sequence DHS pairs with nearby gene homology, and calls significantly conserved pairs
 
+6. Code to produce the score tracks in UCSC genome browser
+
+7. Code to reproduce analyses in the manuscript
+
 For details on each step, see README in the corresponding sub-directories.
 
 Report bugs and provide suggestions by sending email to:
