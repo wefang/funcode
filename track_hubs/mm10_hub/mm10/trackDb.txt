@@ -153,4 +153,3 @@ viewLimits -0.2:0.7
 graphType bar
 maxHeightPixels 50
 bigDataUrl https://github.com/wefang/funcode/raw/main/track_hubs/data/gh_cov_H3K4me3_mm10.bw
-
