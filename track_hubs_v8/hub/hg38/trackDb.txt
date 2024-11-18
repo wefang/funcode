@@ -140,10 +140,10 @@ configurable on
     longLabel Gene-Homology Conservation of Variable Activities (GH-CO-V) score for chromatin accessibility
     subGroups score_type=ghcov data_type=ca
     visibility full
-    color 230,171,2
+    color 27,158,119
     windowingFunction mean 
     autoScale off
-    viewLimits -0.2:0.5
+    viewLimits -0.2:0.65
     graphType bar
     maxHeightPixels 40
     bigDataUrl https://github.com/wefang/funcode/raw/main/track_hubs/data/gh_cov_chromatin_accessibility_hg38.bw
@@ -155,10 +155,10 @@ configurable on
     longLabel Gene-Homology Conservation of Variable Activities (GH-CO-V) score for H3K27ac
     subGroups score_type=ghcov data_type=h3k27ac
     visibility full
-    color 230,171,2
+    color 27,158,119
     windowingFunction mean 
     autoScale off
-    viewLimits -0.2:0.5
+    viewLimits -0.2:0.65
     graphType bar
     maxHeightPixels 40
     bigDataUrl https://github.com/wefang/funcode/raw/main/track_hubs/data/gh_cov_H3K27ac_hg38.bw
@@ -170,10 +170,10 @@ configurable on
     longLabel Gene-Homology Conservation of Variable Activities (GH-CO-V) score for H3K4me1
     subGroups score_type=ghcov data_type=h3k4me1
     visibility full
-    color 230,171,2
+    color 27,158,119
     windowingFunction mean 
     autoScale off
-    viewLimits -0.2:0.5
+    viewLimits -0.2:0.65
     graphType bar
     maxHeightPixels 40
     bigDataUrl https://github.com/wefang/funcode/raw/main/track_hubs/data/gh_cov_H3K4me1_hg38.bw
@@ -185,10 +185,10 @@ configurable on
     longLabel Gene-Homology Conservation of Variable Activities (GH-CO-V) score for H3K4me3
     subGroups score_type=ghcov data_type=h3k4me3
     visibility full
-    color 230,171,2
+    color 27,158,119
     windowingFunction mean 
     autoScale off
-    viewLimits -0.2:0.5
+    viewLimits -0.2:0.65
     graphType bar
     maxHeightPixels 40
     bigDataUrl https://github.com/wefang/funcode/raw/main/track_hubs/data/gh_cov_H3K4me3_hg38.bw
