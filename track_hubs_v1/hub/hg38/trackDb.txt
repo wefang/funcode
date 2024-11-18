@@ -6,7 +6,6 @@ type bigWig
 visibility full
 allButtonPair on
 centerLabelsDense on
-subGroup1 view Views ca=Chromatin_Accessibility h3k27ac=H3K27ac h3k4me1=H3K4me1 h3k4me3=H3K4me3
 
     track cov_hg38_composite
     parent FUNCODE_composite
@@ -77,7 +76,7 @@ subGroup1 view Views ca=Chromatin_Accessibility h3k27ac=H3K27ac h3k4me1=H3K4me1 
     compositeTrack on
     shortLabel COB
     longLabel Conservation of Binding (COB) Scores
-    type view
+    type bigWig
     visibility dense
 
         track cob_ca_hg38
