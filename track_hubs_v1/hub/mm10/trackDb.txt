@@ -1,4 +1,4 @@
-rack FUNCODE_composite
+track FUNCODE_composite
 compositeTrack on
 shortLabel FUNCODE Scores
 longLabel FUNCODE functional conservation scores (mm10)
