@@ -1,6 +1,0 @@
-hub FUNCODE scores
-shortLabel FUNCODE scores
-longLabel FUNCODE scores: Functional conservation between human and mouse from ENCODE consortium
-genomesFile genomes.txt
-email wfang9@jh.edu
-descriptionUrl https://www.biorxiv.org/content/10.1101/2024.10.31.620766v1
