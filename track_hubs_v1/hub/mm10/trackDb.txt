@@ -1,0 +1,168 @@
+track FUNCODE_composite
+compositeTrack on
+shortLabel FUNCODE Scores
+longLabel FUNCODE functional conservation scores (mm10)
+type bigWig
+visibility full
+allButtonPair on
+centerLabelsDense on
+
+    track cov_mm10_composite
+    parent FUNCODE_composite
+    compositeTrack on
+    shortLabel COV
+    longLabel Conservation of Variation (COV) Scores
+    type bigWig
+    visibility dense
+
+        track cov_ca_mm10
+        parent cov_mm10_composite
+        type bigWig
+        shortLabel CO-V chromatin accessibility
+        longLabel Chromatin accessibility Conservation of Variation (COV) score
+        visibility full
+        color 230,97,1
+        windowingFunction mean 
+        autoScale off
+        viewLimits -0.2:0.6
+        graphType bar
+        maxHeightPixels 50
+        bigDataUrl https://github.com/wefang/funcode/raw/main/track_hubs/data/cov_chromatin_accessibility_mm10.bw
+
+        track cov_h3k27ac_mm10
+        parent cov_mm10_composite
+        type bigWig
+        shortLabel COV H3K27ac
+        longLabel H3K27ac Conservation of Variation (COV) score
+        visibility full
+        color 230,97,1
+        windowingFunction mean 
+        autoScale off
+        viewLimits -0.2:0.6
+        graphType bar
+        maxHeightPixels 50
+        bigDataUrl https://github.com/wefang/funcode/raw/main/track_hubs/data/cov_H3K27ac_mm10.bw
+
+        track cov_h3k4me1_mm10
+        parent cov_mm10_composite
+        type bigWig
+        shortLabel COV H3K4me1
+        longLabel H3K4me1 Conservation of Variation (COV) score
+        visibility full
+        color 230,97,1
+        windowingFunction mean 
+        autoScale off
+        viewLimits -0.2:0.6
+        graphType bar
+        maxHeightPixels 50
+        bigDataUrl https://github.com/wefang/funcode/raw/main/track_hubs/data/cov_H3K4me1_mm10.bw
+
+        track cov_h3k4me3_mm10
+        parent cov_mm10_composite
+        type bigWig
+        shortLabel COV H3K4me3
+        longLabel H3K4me3 Conservation of Variation (COV) score
+        visibility full
+        color 230,97,1
+        windowingFunction mean 
+        autoScale off
+        viewLimits -0.2:0.6
+        graphType bar
+        maxHeightPixels 50
+        bigDataUrl https://github.com/wefang/funcode/raw/main/track_hubs/data/cov_H3K4me3_mm10.bw
+
+    track cob_mm10_composite
+    parent FUNCODE_composite
+    compositeTrack on
+    shortLabel COB
+    longLabel Conservation of Binding (COB) Scores
+    type bigWig
+    visibility dense
+
+        track cob_ca_mm10
+        parent cob_mm10_composite
+        type bigWig
+        shortLabel COB chromatin accessibility
+        longLabel Chromatin accessibility Conservation of Binding (COB) score
+        visibility full
+        color 94,60,153
+        windowingFunction mean 
+        autoScale off
+        viewLimits 0:0.9
+        graphType bar
+        maxHeightPixels 50
+        bigDataUrl https://github.com/wefang/funcode/raw/main/track_hubs/data/cob_chromatin_accessibility_mm10.bw
+
+        track cob_h3k27ac_mm10
+        parent cob_mm10_composite
+        type bigWig
+        shortLabel COB H3K27ac
+        longLabel H3K27ac Conservation of Binding (COB) score
+        visibility full
+        color 94,60,153
+        windowingFunction mean 
+        autoScale off
+        viewLimits 0:0.9
+        graphType bar
+        maxHeightPixels 50
+        bigDataUrl https://github.com/wefang/funcode/raw/main/track_hubs/data/cob_H3K27ac_mm10.bw
+
+        track cob_h3k4me1_mm10
+        parent cob_mm10_composite
+        type bigWig
+        shortLabel COB H3K4me1
+        longLabel H3K4me1 Conservation of Binding (COB) score
+        visibility full
+        color 94,60,153
+        windowingFunction mean 
+        autoScale off
+        viewLimits 0:0.9
+        graphType bar
+        maxHeightPixels 50
+        bigDataUrl https://github.com/wefang/funcode/raw/main/track_hubs/data/cob_H3K4me1_mm10.bw
+
+        track cob_h3k4me3_mm10
+        parent cob_mm10_composite
+        type bigWig
+        shortLabel COB H3K4me3
+        longLabel H3K4me3 Conservation of Binding (COB) score
+        visibility full
+        color 94,60,153
+        windowingFunction mean 
+        autoScale off
+        viewLimits 0:0.9
+        graphType bar
+        maxHeightPixels 50
+        bigDataUrl https://github.com/wefang/funcode/raw/main/track_hubs/data/cob_H3K4me3_mm10.bw
+
+    track gh_cov_mm10_composite
+    parent FUNCODE_composite
+    compositeTrack on
+    shortLabel GH-COV
+    longLabel Gene-Homology Conservation of Variable Activities (GH-COV) Scores
+    type bigWig
+    visibility dense
+
+        track gh_cov_ca_mm10
+        parent gh_cov_mm10_composite
+        type bigWig
+        shortLabel GH-COV chromatin accessibility
+        longLabel Chromatin accessibility Gene-Homology Conservation of Variable Activities (GH-COV) score
+        visibility full
+        color 102,166,30
+        windowingFunction mean 
+        autoScale off
+        viewLimits -0.2:0.7
+        graphType bar
+        maxHeightPixels 50
+        bigDataUrl https://github.com/wefang/funcode/raw/main/track_hubs/data/gh_cov_chromatin_accessibility_mm10.bw
+
+        track gh_cov_h3k27ac_mm10
+        parent gh_cov_mm10_composite
+        type bigWig
+        shortLabel GH-COV H3K27ac
+        longLabel H3K27ac Gene-Homology Conservation of Variable Activities (GH-COV) score
+        visibility full
+        color 102,166,30
+        windowingFunction mean 
+        auto
