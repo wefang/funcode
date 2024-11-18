@@ -6,8 +6,8 @@ type bigWig
 visibility full
 allButtonPair on
 centerLabelsDense on
-subGroup1 score_type ScoreType cov=CO-V cob=CO-B ghcov="GH-CO-V"
-subGroup2 data_type DataType ca="Chromatin Accessibility" h3k27ac=H3K27ac h3k4me1=H3K4me1 h3k4me3=H3K4me3
+subGroup1 score_type ScoreType cov=CO-V cob=CO-B ghcov=GH-CO-V
+subGroup2 data_type DataType ca=Chromatin_Accessibility h3k27ac=H3K27ac h3k4me1=H3K4me1 h3k4me3=H3K4me3
 dimensionX score_type
 dimensionY data_type
 sortOrder score_type=+ data_type=+
