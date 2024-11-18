@@ -2,7 +2,7 @@ track FUNCODE_composite
 compositeTrack on
 shortLabel FUNCODE Scores
 longLabel FUNCODE functional conservation scores (mm10)
-type bigWig
+type view
 visibility full
 allButtonPair on
 centerLabelsDense on

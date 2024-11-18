@@ -76,7 +76,7 @@ centerLabelsDense on
     compositeTrack on
     shortLabel COB
     longLabel Conservation of Binding (COB) Scores
-    type bigWig
+    type view
     visibility dense
 
         track cob_ca_hg38
