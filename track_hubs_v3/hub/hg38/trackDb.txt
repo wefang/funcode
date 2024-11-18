@@ -14,12 +14,20 @@ centerLabelsDense on
     longLabel Conservation of Variation (COV) Scores
     type bigWig
     visibility dense
+    subGroup1 view Views ca=Chromatin_Accessibility h3k27ac=H3K27ac h3k4me1=H3K4me1 h3k4me3=H3K4me3
+    dimensions dimensionX=view
+    sortOrder view=+
+    view ca
+    view h3k27ac
+    view h3k4me1
+    view h3k4me3
 
         track cov_ca_hg38
         parent cov_hg38_composite
         type bigWig
         shortLabel CO-V chromatin accessibility
         longLabel Chromatin accessibility Conservation of Variation (COV) score
+        view ca
         visibility full
         color 230,97,1
         windowingFunction mean 
@@ -34,6 +42,7 @@ centerLabelsDense on
         type bigWig
         shortLabel COV H3K27ac
         longLabel H3K27ac Conservation of Variation (COV) score
+        view h3k27ac
         visibility full
         color 230,97,1
         windowingFunction mean 
@@ -48,6 +57,7 @@ centerLabelsDense on
         type bigWig
         shortLabel COV H3K4me1
         longLabel H3K4me1 Conservation of Variation (COV) score
+        view h3k4me1
         visibility full
         color 230,97,1
         windowingFunction mean 
@@ -62,6 +72,7 @@ centerLabelsDense on
         type bigWig
         shortLabel COV H3K4me3
         longLabel H3K4me3 Conservation of Variation (COV) score
+        view h3k4me3
         visibility full
         color 230,97,1
         windowingFunction mean 
@@ -78,12 +89,20 @@ centerLabelsDense on
     longLabel Conservation of Binding (COB) Scores
     type bigWig
     visibility dense
+    subGroup1 view Views ca=Chromatin_Accessibility h3k27ac=H3K27ac h3k4me1=H3K4me1 h3k4me3=H3K4me3
+    dimensions dimensionX=view
+    sortOrder view=+
+    view ca
+    view h3k27ac
+    view h3k4me1
+    view h3k4me3
 
         track cob_ca_hg38
         parent cob_hg38_composite
         type bigWig
         shortLabel COB chromatin accessibility
         longLabel Chromatin accessibility Conservation of Binding (COB) score
+        view ca
         visibility full
         color 94,60,153
         windowingFunction mean 
@@ -98,6 +117,7 @@ centerLabelsDense on
         type bigWig
         shortLabel COB H3K27ac
         longLabel H3K27ac Conservation of Binding (COB) score
+        view h3k27ac
         visibility full
         color 94,60,153
         windowingFunction mean 
@@ -112,6 +132,7 @@ centerLabelsDense on
         type bigWig
         shortLabel COB H3K4me1
         longLabel H3K4me1 Conservation of Binding (COB) score
+        view h3k4me1
         visibility full
         color 94,60,153
         windowingFunction mean 
@@ -126,6 +147,7 @@ centerLabelsDense on
         type bigWig
         shortLabel COB H3K4me3
         longLabel H3K4me3 Conservation of Binding (COB) score
+        view h3k4me3
         visibility full
         color 94,60,153
         windowingFunction mean 
@@ -142,12 +164,20 @@ centerLabelsDense on
     longLabel Gene-Homology Conservation of Variable Activities (GH-COV) Scores
     type bigWig
     visibility dense
+    subGroup1 view Views ca=Chromatin_Accessibility h3k27ac=H3K27ac h3k4me1=H3K4me1 h3k4me3=H3K4me3
+    dimensions dimensionX=view
+    sortOrder view=+
+    view ca
+    view h3k27ac
+    view h3k4me1
+    view h3k4me3
 
         track gh_cov_ca_hg38
         parent gh_cov_hg38_composite
         type bigWig
         shortLabel GH-COV chromatin accessibility
         longLabel Chromatin accessibility Gene-Homology Conservation of Variable Activities (GH-COV) score
+        view ca
         visibility full
         color 102,166,30
         windowingFunction mean 
@@ -162,6 +192,7 @@ centerLabelsDense on
         type bigWig
         shortLabel GH-COV H3K27ac
         longLabel H3K27ac Gene-Homology Conservation of Variable Activities (GH-COV) score
+        view h3k27ac
         visibility full
         color 102,166,30
         windowingFunction mean 
@@ -176,6 +207,7 @@ centerLabelsDense on
         type bigWig
         shortLabel GH-COV H3K4me1
         longLabel H3K4me1 Gene-Homology Conservation of Variable Activities (GH-COV) score
+        view h3k4me1
         visibility full
         color 102,166,30
         windowingFunction mean 
@@ -190,6 +222,7 @@ centerLabelsDense on
         type bigWig
         shortLabel GH-COV H3K4me3
         longLabel H3K4me3 Gene-Homology Conservation of Variable Activities (GH-COV) score
+        view h3k4me3
         visibility full
         color 102,166,30
         windowingFunction mean 

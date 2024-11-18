@@ -14,6 +14,13 @@ centerLabelsDense on
     longLabel Conservation of Variation (COV) Scores
     type bigWig
     visibility dense
+    subGroup1 view Views ca=Chromatin_Accessibility h3k27ac=H3K27ac h3k4me1=H3K4me1 h3k4me3=H3K4me3
+    dimensions dimensionX=view
+    sortOrder view=+
+    view ca
+    view h3k27ac
+    view h3k4me1
+    view h3k4me3
 
         track cov_ca_mm10
         parent cov_mm10_composite
@@ -82,6 +89,13 @@ centerLabelsDense on
     longLabel Conservation of Binding (COB) Scores
     type bigWig
     visibility dense
+    subGroup1 view Views ca=Chromatin_Accessibility h3k27ac=H3K27ac h3k4me1=H3K4me1 h3k4me3=H3K4me3
+    dimensions dimensionX=view
+    sortOrder view=+
+    view ca
+    view h3k27ac
+    view h3k4me1
+    view h3k4me3
 
         track cob_ca_mm10
         parent cob_mm10_composite
@@ -150,6 +164,13 @@ centerLabelsDense on
     longLabel Gene-Homology Conservation of Variable Activities (GH-COV) Scores
     type bigWig
     visibility dense
+    subGroup1 view Views ca=Chromatin_Accessibility h3k27ac=H3K27ac h3k4me1=H3K4me1 h3k4me3=H3K4me3
+    dimensions dimensionX=view
+    sortOrder view=+
+    view ca
+    view h3k27ac
+    view h3k4me1
+    view h3k4me3
 
         track gh_cov_ca_mm10
         parent gh_cov_mm10_composite
