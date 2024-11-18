@@ -6,6 +6,11 @@ Scripts for computing FUNCODE scores from ENCODE DNase-seq, ATAC-seq and Histoen
 [hg38](https://raw.githubusercontent.com/wefang/funcode/main/track_hubs/hg38_hub/hub.txt)
 [mm10](https://raw.githubusercontent.com/wefang/funcode/main/track_hubs/mm10_hub/hub.txt)
 
+![image](https://github.com/user-attachments/assets/270d4bd1-ccc8-43a4-a539-4ae24703e170)
+
+![image](https://github.com/user-attachments/assets/46fcaad6-dfc8-42f4-a8f7-6479f83e06b1)
+
+
 ### Output types on ENCODE data portal
 These scripts produce data corresponding to two output types on the ENCODE data portal:
 
