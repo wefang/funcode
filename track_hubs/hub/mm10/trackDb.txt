@@ -12,6 +12,7 @@ dimensionX score_type
 dimensionY data_type
 sortOrder score_type=+ data_type=+
 configurable on
+html description.html
 
     track cov_dnase_atac_mm10
     parent FUNCODE_mm10
@@ -25,7 +26,7 @@ configurable on
     autoScale off
     viewLimits -0.2:0.5
     graphType bar
-    maxHeightPixels 40
+    maxHeightPixels 50:30:10
     bigDataUrl https://github.com/wefang/funcode/raw/main/track_hubs/data/cov_chromatin_accessibility_mm10.bw
 
     track cov_h3k27ac_mm10
@@ -40,7 +41,7 @@ configurable on
     autoScale off
     viewLimits -0.2:0.5
     graphType bar
-    maxHeightPixels 40
+    maxHeightPixels 50:30:10
     bigDataUrl https://github.com/wefang/funcode/raw/main/track_hubs/data/cov_H3K27ac_mm10.bw
 
     track cov_h3k4me1_mm10
@@ -55,7 +56,7 @@ configurable on
     autoScale off
     viewLimits -0.2:0.5
     graphType bar
-    maxHeightPixels 40
+    maxHeightPixels 50:30:10
     bigDataUrl https://github.com/wefang/funcode/raw/main/track_hubs/data/cov_H3K4me1_mm10.bw
 
     track cov_h3k4me3_mm10
@@ -70,7 +71,7 @@ configurable on
     autoScale off
     viewLimits -0.2:0.5
     graphType bar
-    maxHeightPixels 40
+    maxHeightPixels 50:30:10
     bigDataUrl https://github.com/wefang/funcode/raw/main/track_hubs/data/cov_H3K4me3_mm10.bw
 
     track cob_dnase_atac_mm10
@@ -85,7 +86,7 @@ configurable on
     autoScale off
     viewLimits 0:0.9
     graphType bar
-    maxHeightPixels 40
+    maxHeightPixels 50:30:10
     bigDataUrl https://github.com/wefang/funcode/raw/main/track_hubs/data/cob_chromatin_accessibility_mm10.bw
 
     track cob_h3k27ac_mm10
@@ -100,7 +101,7 @@ configurable on
     autoScale off
     viewLimits 0:0.9
     graphType bar
-    maxHeightPixels 40
+    maxHeightPixels 50:30:10
     bigDataUrl https://github.com/wefang/funcode/raw/main/track_hubs/data/cob_H3K27ac_mm10.bw
 
     track cob_h3k4me1_mm10
@@ -115,7 +116,7 @@ configurable on
     autoScale off
     viewLimits 0:0.9
     graphType bar
-    maxHeightPixels 40
+    maxHeightPixels 50:30:10
     bigDataUrl https://github.com/wefang/funcode/raw/main/track_hubs/data/cob_H3K4me1_mm10.bw
 
     track cob_h3k4me3_mm10
@@ -130,7 +131,7 @@ configurable on
     autoScale off
     viewLimits 0:0.9
     graphType bar
-    maxHeightPixels 40
+    maxHeightPixels 50:30:10
     bigDataUrl https://github.com/wefang/funcode/raw/main/track_hubs/data/cob_H3K4me3_mm10.bw
 
     track gh_cov_chromatin_accessibility_mm10
@@ -145,7 +146,7 @@ configurable on
     autoScale off
     viewLimits -0.2:0.65
     graphType bar
-    maxHeightPixels 40
+    maxHeightPixels 50:30:10
     bigDataUrl https://github.com/wefang/funcode/raw/main/track_hubs/data/gh_cov_chromatin_accessibility_mm10.bw
 
     track gh_cov_h3k27ac_mm10
@@ -160,7 +161,7 @@ configurable on
     autoScale off
     viewLimits -0.2:0.65
     graphType bar
-    maxHeightPixels 40
+    maxHeightPixels 50:30:10
     bigDataUrl https://github.com/wefang/funcode/raw/main/track_hubs/data/gh_cov_H3K27ac_mm10.bw
 
     track gh_cov_h3k4me1_mm10
@@ -175,7 +176,7 @@ configurable on
     autoScale off
     viewLimits -0.2:0.65
     graphType bar
-    maxHeightPixels 40
+    maxHeightPixels 50:30:10
     bigDataUrl https://github.com/wefang/funcode/raw/main/track_hubs/data/gh_cov_H3K4me1_mm10.bw
 
     track gh_cov_h3k4me3_mm10
@@ -190,5 +191,5 @@ configurable on
     autoScale off
     viewLimits -0.2:0.65
     graphType bar
-    maxHeightPixels 40
+    maxHeightPixels 50:30:10
     bigDataUrl https://github.com/wefang/funcode/raw/main/track_hubs/data/gh_cov_H3K4me3_mm10.bw
