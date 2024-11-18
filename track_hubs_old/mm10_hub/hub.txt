@@ -1,5 +1,0 @@
-hub mm10 FUNCODE scores
-shortLabel mm10 FUNCODE scores
-longLabel mm10 FUNCODE scores
-genomesFile genomes.txt
-email wfang9@jh.edu
