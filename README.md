@@ -3,8 +3,8 @@
 Scripts for computing FUNCODE scores from ENCODE DNase-seq, ATAC-seq and Histoen ChIP-seq data.
 
 ### UCSC Browser track hubs:
-[hg38](https://raw.githubusercontent.com/wefang/funcode/main/track_hubs/hg38_hub/hub.txt)
-[mm10](https://raw.githubusercontent.com/wefang/funcode/main/track_hubs/mm10_hub/hub.txt)
+[hg38](https://genome.ucsc.edu/cgi-bin/hgTracks?hubUrl=https://raw.githubusercontent.com/wefang/funcode/main/track_hubs/hub/hub.txt&genome=hg38&position=chr14:53920000-53990000)
+[mm10](https://genome.ucsc.edu/cgi-bin/hgTracks?hubUrl=https://raw.githubusercontent.com/wefang/funcode/main/track_hubs/hub/hub.txt&genome=mm10&position=chr14:46352000-46422000)
 
 ![image](https://github.com/user-attachments/assets/6ccbdfd9-aa9e-4140-970c-fffc46db1371)
 
