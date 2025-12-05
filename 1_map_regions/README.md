@@ -70,14 +70,12 @@ python py/two_region_mm10tohg38.py
 ```
 
 ### Zebrafish Extension
-
-For human-zebrafish validation analyses:
+For human-zebrafish mapping:
 ```bash
 python py/base_run_hg38todanRer10.py
 ```
 
 ## Output
-
 Each mapping produces:
 - Paired coordinates (200bp windows in each species)
 - Alignment block IDs
