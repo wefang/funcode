@@ -1,9 +1,127 @@
-This step maps peaks from one species to another using sequence alignment. For example, to map human DHS peaks mouse:
+# Sequence Homology Mapping for FUNCODE
 
-1. obtain the human DHS peak file (ENCFF03GCK.tsv) from ENCODE portal
-2. obtain the corresponding pairwise alignment file in axt.net file format (eg. hg38.mm10.axt.net) from UCSC genome browser, link https://hgdownload.soe.ucsc.edu/goldenPath/hg38/vsMm10/
-3. obtain the chromatin size file of mouse mm10 from UCSC genome browser(https://hgdownload.cse.ucsc.edu/goldenpath/hg38/bigZips/)
-4. split the axt.net file into multiple files according to chromosome
-5. modify the parameters and run the base_run.py to align submit of human DHS peak to the mm10 genome
-6. extend the human DHS peak and aligned nucleotide base in mouse genome to 200 base pair length region
-7. use the output file from base_run.py to run the two_region_hg38tomm10.py to calculate the percentage of idenditcal base pairs between human regions and correspond mouse regions
+This step maps regulatory elements (e.g., DHS peaks) between species using pairwise sequence alignment. FUNCODE performs **bidirectional mapping** to create a comprehensive set of sequence-homologous regulatory element pairs (REPs).
+
+## Overview
+
+FUNCODE's mapping approach is highly similar to UCSC's liftOver tool - both use the same underlying netted LASTZ alignments. The key distinction is that FUNCODE maps summit positions (single nucleotide) and then extends to fixed-width regions, ensuring mapped regions are centered on orthologous regulatory element summits.
+
+**For liftOver users**: You can apply liftOver to DHS coordinates and expect results consistent with FUNCODE mappings. Both methods use single-coverage netted alignments where each input position maps to at most one output position.
+
+## Bidirectional Mapping Strategy
+
+FUNCODE computes sequence mappings in **both directions** and combines them to create the final core set of REPs:
+
+```
+Forward Mapping (hg38 → mm10):
+  Human DHS summits → Aligned mouse positions → 200bp windows
+
+Reverse Mapping (mm10 → hg38):
+  Mouse DHS midpoints → Aligned human positions → 200bp windows
+
+Final Core Set = Forward Set + Non-duplicate Reverse Mappings
+```
+
+This bidirectional approach ensures:
+1. Comprehensive coverage of both species' regulatory elements
+2. Identification of reciprocal vs non-reciprocal mappings
+3. Removal of duplicate pairs that appear in both directions
+
+### Duplicate Removal
+
+A pair from the reverse mapping is considered a duplicate if both its human and mouse elements overlap by >50bp with any pair in the forward set. After removing duplicates, the remaining reverse-mapped pairs are combined with the forward set.
+
+## Input Data
+
+### 1. Regulatory Element Peaks
+- **Human**: DHS peaks from ENCODE (e.g., ENCFF503GCK)
+- **Mouse**: DHS peaks from ENCODE (e.g., ENCFF910SRW)
+
+### 2. Pairwise Sequence Alignments
+Download from UCSC Genome Browser:
+
+| Direction | Alignment File | Source |
+|-----------|---------------|--------|
+| hg38 → mm10 | `hg38.mm10.net.axt.gz` | https://hgdownload.soe.ucsc.edu/goldenPath/hg38/vsMm10/ |
+| mm10 → hg38 | `mm10.hg38.net.axt.gz` | https://hgdownload.soe.ucsc.edu/goldenPath/mm10/vsHg38/ |
+
+### 3. Chromosome Size Files
+- Human hg38: https://hgdownload.cse.ucsc.edu/goldenpath/hg38/bigZips/
+- Mouse mm10: https://hgdownload.cse.ucsc.edu/goldenpath/mm10/bigZips/
+
+## Pipeline Scripts
+
+### Forward Mapping (Human → Mouse)
+
+```bash
+# 1. Prepare human DHS summit coordinates
+Rscript R/make_region_file.R
+
+# 2. Split axt.net file by chromosome
+# (preprocessing step)
+
+# 3. Map summits to mouse genome
+python py/base_run_hg38tomm10.py
+
+# 4. Calculate sequence identity
+python py/two_region_hg38tomm10.py
+```
+
+### Reverse Mapping (Mouse → Human)
+
+```bash
+# 1. Map mouse DHS midpoints to human genome
+python py/base_run_mm10tohg38.py
+
+# 2. Calculate sequence identity
+python py/two_region_mm10tohg38.py
+```
+
+### Zebrafish Extension
+
+For human-zebrafish validation analyses:
+```bash
+python py/base_run_hg38todanRer10.py
+```
+
+## Output
+
+Each mapping produces:
+- Paired coordinates (200bp windows in each species)
+- Alignment block IDs
+- Strand orientation
+- Gap status
+- Percent sequence homology (PSH)
+
+## Comparison with liftOver
+
+| Feature | FUNCODE | liftOver |
+|---------|---------|----------|
+| Underlying alignment | UCSC netted LASTZ | UCSC netted LASTZ |
+| Mapping unit | Summit/midpoint → 200bp window | Arbitrary interval |
+| Bidirectional | Yes (computed both ways) | One direction per run |
+| Sequence identity | Computed and stored | Not provided |
+| Alignment metadata | Block IDs, strand, gaps | Minimal |
+
+## References
+
+- UCSC Genome Browser: https://genome.ucsc.edu/
+- LASTZ documentation: https://lastz.github.io/lastz/
+- ENCODE Portal: https://www.encodeproject.org/
+
+## File Structure
+
+```
+1_map_regions/
+├── py/
+│   ├── base_module.py           # Core mapping functions
+│   ├── region_module.py         # Region handling utilities
+│   ├── base_run_hg38tomm10.py   # Human → Mouse mapping
+│   ├── base_run_mm10tohg38.py   # Mouse → Human mapping
+│   ├── base_run_hg38todanRer10.py  # Human → Zebrafish mapping
+│   ├── two_region_hg38tomm10.py    # Sequence identity (H→M)
+│   └── two_region_mm10tohg38.py    # Sequence identity (M→H)
+├── R/
+│   └── make_region_file.R       # Prepare input region files
+└── README.md
+```
