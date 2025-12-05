@@ -6,11 +6,9 @@ This step maps regulatory elements (e.g., DHS peaks) between species using pairw
 
 FUNCODE's mapping approach is highly similar to UCSC's liftOver tool - both use the same underlying netted LASTZ alignments. The key distinction is that FUNCODE maps summit positions (single nucleotide) and then extends to fixed-width regions, ensuring mapped regions are centered on orthologous regulatory element summits.
 
-**For liftOver users**: You can apply liftOver to DHS coordinates and expect results consistent with FUNCODE mappings. Both methods use single-coverage netted alignments where each input position maps to at most one output position.
-
 ## Bidirectional Mapping Strategy
 
-FUNCODE computes sequence mappings in **both directions** and combines them to create the final core set of REPs:
+FUNCODE maps DHSs in **both directions** and combines them to create the final core set of REPs:
 
 ```
 Forward Mapping (hg38 → mm10):
@@ -22,13 +20,7 @@ Reverse Mapping (mm10 → hg38):
 Final Core Set = Forward Set + Non-duplicate Reverse Mappings
 ```
 
-This bidirectional approach ensures:
-1. Comprehensive coverage of both species' regulatory elements
-2. Identification of reciprocal vs non-reciprocal mappings
-3. Removal of duplicate pairs that appear in both directions
-
 ### Duplicate Removal
-
 A pair from the reverse mapping is considered a duplicate if both its human and mouse elements overlap by >50bp with any pair in the forward set. After removing duplicates, the remaining reverse-mapped pairs are combined with the forward set.
 
 ## Input Data
